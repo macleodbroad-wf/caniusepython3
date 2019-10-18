@@ -45,7 +45,7 @@ class Command(setuptools.Command):
         pass
 
     def run(self):
-        passed = ciu_main.check(self._dependencies())
+        passed = ciu_main.check(self._dependencies(), pypi.INDEX_URL)
         if not passed:
             sys.exit(3)
 

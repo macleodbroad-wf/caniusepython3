@@ -15,7 +15,7 @@
 from __future__ import unicode_literals
 import distlib.locators
 
-from caniusepython3 import dependencies
+from caniusepython3 import dependencies, pypi
 from caniusepython3.test import mock, unittest
 
 import io
@@ -67,7 +67,7 @@ class DependenciesTests(unittest.TestCase):
 class NetworkTests(unittest.TestCase):
 
     def test_blockers(self):
-        got = frozenset(dependencies.blockers(['ralph_scrooge']))
+        got = frozenset(dependencies.blockers(['ralph_scrooge'], pypi.INDEX_URL))
         want = frozenset([('ralph', 'ralph_scrooge'), ('ralph-assets', 'ralph_scrooge')])
         self.assertEqual(got, want)
 
@@ -80,11 +80,11 @@ class NetworkTests(unittest.TestCase):
         self.assertIsNone(got)
 
     def test_blockers_no_project(self):
-        got = dependencies.blockers(['asdfsadfdsfsdffdfadf'])
+        got = dependencies.blockers(['asdfsadfdsfsdffdfadf'], pypi.INDEX_URL)
         self.assertEqual(got, frozenset())
 
     def test_manual_overrides(self):
-        self.assertEqual(dependencies.blockers(["unittest2"]), frozenset())
+        self.assertEqual(dependencies.blockers(["unittest2"], pypi.INDEX_URL), frozenset())
 
 
 if __name__ == '__main__':
