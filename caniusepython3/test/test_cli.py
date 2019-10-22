@@ -147,6 +147,17 @@ class CLITests(unittest.TestCase):
         got = ciu_main.projects_from_parsed(parsed)
         self.assertEqual(set(got), frozenset(['foo', 'bar-baz']))
 
+    def test_cli_for_index(self):
+        args = ['--projects', 'foo', 'bar.baz',
+                '--index', 'some-url']
+        parsed = ciu_main.arguments_from_cli(args)
+        self.assertEqual(parsed.index, 'some-url')
+
+    def test_cli_for_index_default(self):
+        args = ['--projects', 'foo', 'bar.baz']
+        parsed = ciu_main.arguments_from_cli(args)
+        self.assertEqual(parsed.index, 'https://pypi.org/pypi')
+
     def test_message_plural(self):
         blockers = [['A'], ['B']]
         messages = ciu_main.message(blockers)
