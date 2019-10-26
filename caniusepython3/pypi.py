@@ -37,7 +37,7 @@ except NotImplementedError:  #pragma: no cover
     CPU_COUNT = 2
 
 PROJECT_NAME = re.compile(r'[\w.-]+')
-INDEX_URL = 'https://pypi.org/pypi'
+PYPI_INDEX_URL = 'https://pypi.org/pypi'
 
 
 def just_name(supposed_name):
@@ -75,7 +75,7 @@ def _manual_overrides(_cache_date=None):
     return frozenset(map(packaging.utils.canonicalize_name, overrides.keys()))
 
 
-def supports_py3(project_name, index_url=INDEX_URL):
+def supports_py3(project_name, index_url=PYPI_INDEX_URL):
     """Check with PyPI if a project supports Python 3."""
     log = logging.getLogger("ciu")
     log.info("Checking {} ...".format(project_name))

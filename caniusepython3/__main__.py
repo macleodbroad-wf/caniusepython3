@@ -48,7 +48,7 @@ def arguments_from_cli(args):
     parser.add_argument('--exclude', '-e', action='append', default=[],
                         help='Ignore list')
     index_help = 'index to to search for packages (e.g. https://pypi.org/pypi)'
-    parser.add_argument('--index', '-i', default=pypi.INDEX_URL,
+    parser.add_argument('--index', '-i', default=pypi.PYPI_INDEX_URL,
                         help=index_help)
     parsed = parser.parse_args(args)
     if not (parsed.requirements or parsed.metadata or parsed.projects):
@@ -126,7 +126,7 @@ def pprint_blockers(blockers):
     return pprinted
 
 
-def check(projects, index_url):
+def check(projects, index_url=pypi.PYPI_INDEX_URL):
     """Check the specified projects for Python 3 compatibility."""
     log = logging.getLogger('ciu')
     log.info('{0} top-level projects to check'.format(len(projects)))

@@ -63,7 +63,7 @@ def dependencies(project_name):
             for dep in located.run_requires}
 
 
-def blockers(project_names, index_url):
+def blockers(project_names, index_url=pypi.PYPI_INDEX_URL):
     log = logging.getLogger('ciu')
     overrides = pypi.manual_overrides()
 

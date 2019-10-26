@@ -15,7 +15,7 @@
 from __future__ import unicode_literals
 
 import caniusepython3.__main__ as ciu_main
-from caniusepython3 import projects
+from caniusepython3 import projects, pypi
 from caniusepython3.test import mock, unittest, skip_pypi_timeouts
 
 import io
@@ -236,6 +236,12 @@ class NetworkTests(unittest.TestCase):
         # Make sure at least one project that will never be in Python 3 is
         # included.
         args = '--projects', 'numpy', 'scipy', 'matplotlib', 'ipython', 'paste'
+        ciu_main.main(args)
+
+    @skip_pypi_timeouts
+    @mock.patch('sys.stdout', io.StringIO())
+    def test_e2e_with_specified_index(self):
+        args = '--projects', 'paste', '--index', pypi.PYPI_INDEX_URL
         ciu_main.main(args)
 
 
